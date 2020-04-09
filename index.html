@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First AngularJS project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="angular.js"></script>
+    <script defer src="main.js"></script>
+  </head>
+  <body ng-controller="MainController as mc">
+    <div class="myDiv">
+      <p ng-if="!mc.error">
+        {{mc.message}} {{mc.person.name}} {{mc.person.location}}
+      </p>
+      <p ng-if="mc.error">
+        {{mc.errorMessage}}
+      </p>
+      <form name="search" ng-submit="searchUser(username)">
+        <input
+          type="text"
+          required
+          placeholder="username to search"
+          ng-model="username"
+        />
+        <input type="submit" value="Reset" />
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Stars</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+
+        <tr ng-repeat="repo in mc.userRepos">
+          <td>{{repo.name}}</td>
+          <td>{{repo.stargazers_count | number}}</td>
+          <td>{{repo.language}}</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
